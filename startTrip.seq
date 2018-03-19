@@ -1,17 +1,22 @@
 title Trip start
 
-User->tripManagerUtilityManager: start trip
-tripManagerUtilityManager->trip: create new trip
-trip->eventCreater: event "start" create
-eventCreater->event"start":create "start"
-note right of event"start": eventType - "start"\ntime - current time\nlocation - current location\nmember-[member]
-event"start"->eventCreater: return self
-eventCreater->trip: return "start"\n save to EventList
-trip->eventCreater: event "route" create
-eventCreater->event"route": create "route"
-note left of event"route": eventType - "route"\nstart Time - current time\nstart location - current locatoin\nmember-[member]
-event"route"->eventCreater: return self
-eventCreater->trip: return "route"\n save to eventList\nsave to currentEvent
-trip->tripManagerUtilityManager: return self
-note right of tripManagerUtilityManager:save to tripList\nsave to currentTrip\ngive currentEvent's current event to Monitor(event/trip)
-tripManagerUtilityManager->User: show start position to map\ninform current trip & current event
+User->tripManager: start trip
+tripManager->trip: create new trip
+note right of trip: member - default[self] (+other?)\n name - ?? can temp name\n index - ??
+trip -> tripManager: return self\n
+note right of tripManager:save to tripList\nsave to currentTrip\n
+tripManager->git: commit "start" create
+note right of git: the git is history manager & the commit is event of the trip history
+git->commit"start":create "start"
+note right of commit"start": eventType - "start"\ntime - current time\nmember-[member] self default?
+commit"start"->git: return self
+git->tripManager: return "start"\n
+tripManager->trip: save "start" to eventList
+tripManager->git: commit"route" create
+git->commit"route": create "route"
+note left of commit"route": eventType - "route"\nstart Time - current time\nstart location - current locatoin\nmember-[member] self default?
+commit"route"->git: return self
+git->tripManager: return "route"\n
+tripManager->trip: save to eventList\nsave to currentEvent
+tripManager->monitor: registe commit"route", set timer to detect periodicaly route and to save commits
+tripManager->User: show start position to map\ninform current trip & current event
