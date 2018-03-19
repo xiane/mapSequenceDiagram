@@ -1,0 +1,17 @@
+title Trip start
+
+User->tripManagerUtilityManager: start trip
+tripManagerUtilityManager->trip: create new trip
+trip->eventCreater: event "start" create
+eventCreater->event"start":create "start"
+note right of event"start": eventType - "start"\ntime - current time\nlocation - current location\nmember-[member]
+event"start"->eventCreater: return self
+eventCreater->trip: return "start"\n save to EventList
+trip->eventCreater: event "route" create
+eventCreater->event"route": create "route"
+note left of event"route": eventType - "route"\nstart Time - current time\nstart location - current locatoin\nmember-[member]
+event"route"->eventCreater: return self
+eventCreater->trip: return "route"\n save to eventList\nsave to currentEvent
+trip->tripManagerUtilityManager: return self
+note right of tripManagerUtilityManager:save to tripList\nsave to currentTrip\ngive currentEvent's current event to Monitor(event/trip)
+tripManagerUtilityManager->User: show start position to map\ninform current trip & current event
