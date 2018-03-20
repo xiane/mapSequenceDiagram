@@ -19,4 +19,6 @@ commit"route"->git: return self
 git->tripManager: return "route"\n
 tripManager->trip: save to eventList\nsave to currentEvent
 tripManager->monitor: registe commit"route", set timer to detect periodicaly route and to save commits
+tripManager->mediaMonitor: start observing to hook the media like picture, video, etc.
+note right of mediaMonitor: media Monitor? Manager?
 tripManager->User: show start position to map\ninform current trip & current event
