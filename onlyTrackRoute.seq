@@ -1,0 +1,30 @@
+title only tracking route
+tripManager->+routeTracker: start tracking route by local information. & if need, draw route at real time.
+activate tripManager
+tripManager->+monitor: registe timer to save & re generate commit"route and notice now state is routing
+tripManager->+mediaObserver: start observing to hook the media like picture, video, etc.
+deactivate tripManager
+note over tripManager, mediaObserver: above 3 are end of start trip so that will be removed.
+loop until end
+    routeTracker->routeTracker: rapid tracking & update commit"route"
+    monitor->*+timer: set timer
+    timer->-monitor: alarm to monitor to stop\ntracking stop self
+    destroy timer
+    monitor->-tripManager: signal to tripManager to stop tracking\nmonitor continue monitoring?
+    activate tripManager
+    tripManager->routeTracker: stop tracking
+    routeTracker->-tripManager: return updated commit"route"
+    note left of routeTracker:if commit was shared by reference,\nneed not to return
+    tripManager->trip: update commit"route"
+    note right of trip:if commit was shared by reference,\nneed not to do it.
+    tripManager->+git:create commit"route"
+    git->*+commit"route": created commit
+    commit"route"->-git: return self
+    destroy commit"route"
+    git->tripManager: return commit"route"
+    tripManager->trip: add to tripList\n save to currentEvent
+    activate tripManager
+    tripManager->+routeTracker: start tracking route by local information. & if need, draw route at real time.
+    tripManager->+monitor: registe timer to save & re generate commit"route and notice now state is routing
+    deactivate tripManager
+end

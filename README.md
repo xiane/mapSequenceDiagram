@@ -16,4 +16,6 @@ https://www.websequencediagrams.com
 
 2. History
 20180319
-- add - start trip
+- add : start trip
+20180321
+- add : record trip route only - only tracking route
