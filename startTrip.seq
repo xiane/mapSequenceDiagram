@@ -17,9 +17,9 @@ tripManager->+git: commit"route" create
 git->*+commit"route": create "route"
 note left of commit"route": eventType - "route"\nstart Time - current time\nstart location - current locatoin\nmember-[member] self default?
 commit"route"->-git: return self
-destroy commit"route"
-git->-tripManager: return "route"\n
+git->-tripManager: return commit"route"\nsave to currentEvent
 tripManager->trip: save to eventList\nsave to currentEvent
-tripManager->+monitor: registe commit"route", set timer to detect periodicaly route and to save commits
+tripManager->+routeTracker: start tracking route by local information. & if need, draw route at real time.
+tripManager->+monitor: registe timer to save & re generate commit"route and notice now state is routing
 tripManager->+mediaObserver: start observing to hook the media like picture, video, etc.
 tripManager->-User: show start position to map\ninform current trip & current event
