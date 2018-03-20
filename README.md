@@ -4,6 +4,4 @@ syntax & web page
 https://www.websequencediagrams.com
 
 20180319
-- start trip v0.1
-20180320
-- start trip v0.2
+- add - start trip
