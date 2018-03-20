@@ -1,23 +1,25 @@
 title Trip start
 
-User->tripManager: start trip
-tripManager->trip: create new trip
+User->+tripManager: start trip
+tripManager->*+trip: create new trip
 note right of trip: member - default[self] (+other?)\n name - ?? can temp name\n index - ??
-trip -> tripManager: return self\n
+trip -> -tripManager: return self\n
 note right of tripManager:save to tripList\nsave to currentTrip\n
-tripManager->git: commit "start" create
+tripManager->+git: commit "start" create
 note right of git: the git is history manager & the commit is event of the trip history
-git->commit"start":create "start"
+git->*+commit"start":create "start"
 note right of commit"start": eventType - "start"\ntime - current time\nmember-[member] self default?
-commit"start"->git: return self
-git->tripManager: return "start"\n
+commit"start"->-git: return self
+destroy commit"start"
+git->-tripManager: return "start"\n
 tripManager->trip: save "start" to eventList
-tripManager->git: commit"route" create
-git->commit"route": create "route"
+tripManager->+git: commit"route" create
+git->*+commit"route": create "route"
 note left of commit"route": eventType - "route"\nstart Time - current time\nstart location - current locatoin\nmember-[member] self default?
-commit"route"->git: return self
-git->tripManager: return "route"\n
+commit"route"->-git: return self
+destroy commit"route"
+git->-tripManager: return "route"\n
 tripManager->trip: save to eventList\nsave to currentEvent
-tripManager->monitor: registe commit"route", set timer to detect periodicaly route and to save commits
-tripManager->mediaObserver: start observing to hook the media like picture, video, etc.
-tripManager->User: show start position to map\ninform current trip & current event
+tripManager->+monitor: registe commit"route", set timer to detect periodicaly route and to save commits
+tripManager->+mediaObserver: start observing to hook the media like picture, video, etc.
+tripManager->-User: show start position to map\ninform current trip & current event
