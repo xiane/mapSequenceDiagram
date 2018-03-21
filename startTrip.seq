@@ -13,6 +13,9 @@ commit"start"->-git: return self
 destroy commit"start"
 git->-tripManager: return "start"\n
 tripManager->trip: save "start" to eventList
+tripManager->+monitor: init monitor to set mediaObserver
+monitor->+mediaObserver: start observing to hook the media like picture, video, etc.
+monitor->-tripManager: return observer init result
 tripManager->+git: commit"route" create
 git->*+commit"route": create "route"
 note left of commit"route": eventType - "route"\nstart Time - current time\nstart location - current locatoin\nmember-[member] self default?
@@ -20,6 +23,5 @@ commit"route"->-git: return self
 git->-tripManager: return commit"route"\nsave to currentEvent
 tripManager->trip: save to eventList\nsave to currentEvent
 tripManager->+routeTracker: start tracking route by local information. & if need, draw route at real time.
-tripManager->+monitor: registe timer to save & re generate commit"route and notice now state is routing
-tripManager->+mediaObserver: start observing to hook the media like picture, video, etc.
+tripManager->+monitor: registe timer to save & regenerate commit"route and notice now state is routing
 tripManager->-User: show start position to map\ninform current trip & current event
