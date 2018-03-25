@@ -1,0 +1,7 @@
+title create "route" commit
+
+tripManager->+git: commit"route" create
+git->*+commit"route": create "route"
+note left of commit"route": eventType - "route"\nstart Time - current time\nstart location - current locatoin\nmember-[member] self default?
+commit"route"->-git: return self
+git->-tripManager: return commit"route"\nsave to currentEvent
