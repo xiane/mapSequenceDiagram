@@ -5,9 +5,9 @@ activate tripManager
 monitor->+mediaObserver: start observing to hook the media like picture, video, etc.
 monitor->-tripManager: return observer init result
 
-tripManager->+git: commit"route" create (this is simplified version)
-git->-tripManager: return commit"route"\nsave to currentEvent
-tripManager->trip: save to eventList\nsave to currentEvent
+opt create "route"
+note over tripManager, git: create "route" commit
+end
 
 tripManager->+routeTracker: start tracking route by local information. & if need, draw route at real time.
 tripManager->+monitor : registe timer to save & regenerate commit"route and notice now state is routing
@@ -30,11 +30,9 @@ loop until end
     tripManager->trip: update commit"route"
     note right of trip:if commit was shared by reference,\nneed not to do it.
 
-    tripManager->+git:create commit"route"
-    git->*+commit"route": created commit
-    commit"route"->-git: return self
-    git->tripManager: return commit"route"
-    tripManager->trip: add to tripList\n save to currentEvent
+    opt create "route"
+    note over tripManager, git: create "route" commit
+    end
 
     activate tripManager
     tripManager->+routeTracker: start tracking route by local information. & if need, draw route at real time.
