@@ -1,0 +1,29 @@
+title take a media
+
+note right of User: take a media. media - picture, video, memo.
+captureInfo -> +mediaObserver: hook the media information.
+mediaObserver -> -monitor: notifing toke a media\n return the media infos.
+activate monitor
+monitor -> timer: kill the timer
+destroy timer
+
+monitor->-tripManager: signal to tripManager to stop tracking\nreturn the media infos.
+activate tripManager
+tripManager->+routeTracker: stop tracking
+routeTracker->-tripManager: return updated commit"route"
+note left of routeTracker:if commit was shared by reference,\nneed not to return
+tripManager->trip: update commit"route"
+note right of trip:if commit was shared by reference,\nneed not to do it.
+
+tripManager->+git: create commit"media"\n send the media infos. switched by media type.
+git->*+commit"media": create commit"media"
+note right of commit"media":date, location, media, etc.\n- picture:pointer of picture path, ..\nvideo:duration, video path.\nmemo: memo text.
+commit"media"->-git: return self
+destroy commit"media"
+git->-tripManager:return commit"media"
+tripManager->trip:add to evnetList.
+
+opt only track route
+note over mediaObserver, git: tracking the route
+end
+deactivate tripManager
