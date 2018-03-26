@@ -1,0 +1,22 @@
+title end trip
+
+user->+tripManager: touch end trip button
+tripManager->+monitor:stop monitor
+monitor->timer: kill timer
+destroy timer
+monitor->mediaObserver: stop observer destroy it?
+deactivate monitor
+
+tripManager->+routeTracker: stop tracking the route
+routeTracker->-tripManager: return route result
+tripManager->trip: record commit "route"
+
+tripManager->+git: create commit "end"
+git->+commit"end": create commit
+note right of commit"end": date, location?, member
+commit"end"->-git: return self
+git->-tripManager: return commit "end"
+tripManager->trip: save commit"end" to eventList.
+
+note left of tripManager: set currentTrip to null
+tripManager->user: show end trip
