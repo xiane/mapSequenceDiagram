@@ -6,9 +6,8 @@ syntax & web page
 https://www.websequencediagrams.com
 
 1. TODO list
-- make 'record trip when cam captured' - this will be come capture media (picture, video, memo etc)
-- make 'stop trip'
 - make 'restart trip'
+- make 'stop trip'
 - make 'select trip from trip list'
 
 2. done list
@@ -16,6 +15,7 @@ https://www.websequencediagrams.com
 - make 'create trip' sequence to separate and to avoid duplication.
 - make 'record trip when cam captured' -> take a picture
 - make 'end trip'
+- make 'record trip when cam captured' - this will be come capture media (picture, video, memo etc) integrated to on sequence.
 
 3. History
 20180319
@@ -24,3 +24,4 @@ https://www.websequencediagrams.com
 - add : record trip route only - only tracking route
 20180326
 - add :  create trip, record trip when cam captured, end trip
+- renamed: record trip when cam captured -> record trip when media captured
