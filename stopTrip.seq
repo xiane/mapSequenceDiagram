@@ -1,0 +1,20 @@
+title stop trip
+
+user->+tripManager: stop trip
+tripManager->+monitor:stop monitor
+monitor->timer: kill timer
+destroy timer
+monitor->mediaObserver: stop observer
+deactivate monitor
+tripManager->+routeTracker: stop tracking the route
+routeTracker->-tripManager: return route result
+tripManager->trip: record commit "route"
+
+tripManager->+git: create commit "stop"
+git->+commit"stop": create commit
+note right of commit"stop": date, location, member
+commit"stop"->-git: return self
+git->-tripManager: return commit "stop"
+tripManager->trip: save commit"stop" to eventList.\nset currentEvent
+note left of tripManager: set currentEvent
+tripManager->user: show stop trip
