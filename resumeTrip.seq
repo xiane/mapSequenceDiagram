@@ -1,0 +1,23 @@
+title resume trip
+
+User->+tripManager: resume trip
+
+tripManager->+git: commit "resume" create
+git->*+commit"resume":create "resume"
+note right of commit"resume": eventType - "resume"\ntime - current time\nmember-[member] self default?
+commit"resume"->-git: return self
+destroy commit"resume"
+git->-tripManager: return "resume"\n
+tripManager->trip: save "resume" to eventList
+
+tripManager->+monitor: start observer
+monitor->+mediaObserver: start observing to hook the media like picture, video, etc.
+deactivate monitor
+
+opt create "route"
+note over tripManager, git : create "route" commit
+end
+
+tripManager->+routeTracker: start tracking route by local information. & if need, draw route at real time.
+tripManager->+monitor: registe timer to save & regenerate commit"route and notice now state is routing
+tripManager->-User: show start position to map\ninform current trip & current event
